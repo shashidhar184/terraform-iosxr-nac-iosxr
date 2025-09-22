@@ -17,11 +17,9 @@ Configuring an IOS-XR hostname configuration using YAML:
 iosxr:
   devices:
     - name: router-1
-      host: 10.122.20.77:2627
+      host: 1.2.3.4
       configuration:
         hostname: router-1
-        l2vpn_bridge_group:
-          - group_name: BG123
 
 ```
 
@@ -29,7 +27,8 @@ iosxr:
 
 ```hcl
 module "iosxr" {
-  source = "../.."
+  source  = "netascode/nac-iosxr/iosxr"
+  version = ">= 0.1.0"
 
   yaml_files = ["system.nac.yaml"]
 }
