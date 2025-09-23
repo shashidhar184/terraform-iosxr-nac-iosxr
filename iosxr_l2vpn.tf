@@ -5,7 +5,6 @@ locals {
         device_name = device.name
         key         = "${device.name}-l2vpn"
 
-        delete_mode                     = try(local.device_config[device.name].l2vpn.delete_mode, local.defaults.iosxr.configuration.l2vpn_delete_mode, null)
         description                     = try(local.device_config[device.name].l2vpn.description, local.defaults.iosxr.configuration.l2vpn_description, null)
         router_id                       = try(local.device_config[device.name].l2vpn.router_id, local.defaults.iosxr.configuration.l2vpn_router_id, null)
         load_balancing_flow_src_dst_ip  = try(local.device_config[device.name].l2vpn.load_balancing_flow_src_dst_ip, local.defaults.iosxr.configuration.l2vpn_load_balancing_flow_src_dst_ip, null)
@@ -26,7 +25,6 @@ resource "iosxr_l2vpn" "l2vpn" {
   for_each = { for l2vpn in local.device_l2vpn_configs : l2vpn.key => l2vpn }
 
   device                          = each.value.device_name
-  delete_mode                     = each.value.delete_mode
   description                     = each.value.description
   router_id                       = each.value.router_id
   load_balancing_flow_src_dst_ip  = each.value.load_balancing_flow_src_dst_ip
