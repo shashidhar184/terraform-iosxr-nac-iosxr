@@ -12,7 +12,7 @@ locals {
 
         xconnect_groups = [
           for group in try(local.device_config[device.name].l2vpn.xconnect_groups, local.defaults.iosxr.configuration.l2vpn_xconnect_groups, []) : {
-            group_name = try(group.group_name, null)
+            group_name = try(group.group_name, local.defaults.iosxr.configuration.l2vpn_xconnect_group_name, null)
           }
         ]
       }
