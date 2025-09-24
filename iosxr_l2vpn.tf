@@ -17,7 +17,7 @@ locals {
         ]
       }
     ]
-    if try(local.device_config[device.name].l2vpn, local.defaults.iosxr.configuration.l2vpn, null) != null
+    if try(local.device_config[device.name].l2vpn, null) != null || try(local.defaults.iosxr.configuration.l2vpn, null) != null
   ])
 }
 
