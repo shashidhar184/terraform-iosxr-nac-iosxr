@@ -1,28 +1,19 @@
 locals {
   device_router_hsrp_interfaces = flatten([
     for device in local.devices : [
-      for hsrp_interface in try(local.device_config[device.name].router_hsrp_interface, local.defaults.iosxr.configuration.router_hsrp_interface, []) : {
+      for hsrp_interface in try(local.device_config[device.name].router_hsrp_interface, []) : {
         device_name               = device.name
-        interface_name            = try(hsrp_interface.interface_name, local.defaults.iosxr.configuration.router_hsrp_interface_interface_name, null)
-        hsrp_use_bia              = try(hsrp_interface.hsrp_use_bia, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_use_bia, null)
-        hsrp_redirects_disable    = try(hsrp_interface.hsrp_redirects_disable, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_redirects_disable, null)
-        hsrp_delay_minimum        = try(hsrp_interface.hsrp_delay_minimum, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_delay_minimum, null)
-        hsrp_delay_reload         = try(hsrp_interface.hsrp_delay_reload, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_delay_reload, null)
-        hsrp_bfd_minimum_interval = try(hsrp_interface.hsrp_bfd_minimum_interval, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_bfd_minimum_interval, null)
-        hsrp_bfd_multiplier       = try(hsrp_interface.hsrp_bfd_multiplier, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_bfd_multiplier, null)
-        hsrp_mac_refresh          = try(hsrp_interface.hsrp_mac_refresh, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_mac_refresh, null)
+        interface_name            = try(hsrp_interface.interface_name, local.defaults.iosxr.configuration.router_hsrp_interface.interface_name, null)
+        hsrp_use_bia              = try(hsrp_interface.hsrp_use_bia, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_use_bia, null)
+        hsrp_redirects_disable    = try(hsrp_interface.hsrp_redirects_disable, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_redirects_disable, null)
+        hsrp_delay_minimum        = try(hsrp_interface.hsrp_delay_minimum, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_delay_minimum, null)
+        hsrp_delay_reload         = try(hsrp_interface.hsrp_delay_reload, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_delay_reload, null)
+        hsrp_bfd_minimum_interval = try(hsrp_interface.hsrp_bfd_minimum_interval, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_bfd_minimum_interval, null)
+        hsrp_bfd_multiplier       = try(hsrp_interface.hsrp_bfd_multiplier, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_bfd_multiplier, null)
+        hsrp_mac_refresh          = try(hsrp_interface.hsrp_mac_refresh, local.defaults.iosxr.configuration.router_hsrp_interface.hsrp_mac_refresh, null)
         key                       = "${device.name}-router_hsrp_interface-${hsrp_interface.interface_name}"
       }
-      if try(hsrp_interface.interface_name, local.defaults.iosxr.configuration.router_hsrp_interface_interface_name, null) != null &&
-      try(hsrp_interface.hsrp_use_bia, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_use_bia, null) != null &&
-      try(hsrp_interface.hsrp_redirects_disable, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_redirects_disable, null) != null &&
-      try(hsrp_interface.hsrp_delay_minimum, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_delay_minimum, null) != null &&
-      try(hsrp_interface.hsrp_delay_reload, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_delay_reload, null) != null &&
-      try(hsrp_interface.hsrp_bfd_minimum_interval, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_bfd_minimum_interval, null) != null &&
-      try(hsrp_interface.hsrp_bfd_multiplier, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_bfd_multiplier, null) != null &&
-      try(hsrp_interface.hsrp_mac_refresh, local.defaults.iosxr.configuration.router_hsrp_interface_hsrp_mac_refresh, null) != null
     ]
-    if try(local.device_config[device.name].router_hsrp_interface, null) != null || try(local.defaults.iosxr.configuration.router_hsrp_interface, null) != null
   ])
 }
 
