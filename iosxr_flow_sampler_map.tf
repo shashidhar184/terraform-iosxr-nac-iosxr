@@ -9,7 +9,6 @@ locals {
         out_of      = try(sampler_map.out_of, local.defaults.iosxr.configuration.flow_sampler_map.out_of, null)
       }
     ]
-    if try(local.device_config[device.name].flow_sampler_map, null) != null || try(local.defaults.iosxr.configuration.flow_sampler_map, null) != null
   ])
 }
 
