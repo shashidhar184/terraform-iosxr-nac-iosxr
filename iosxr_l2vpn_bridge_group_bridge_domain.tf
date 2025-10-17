@@ -24,8 +24,8 @@ locals {
             split_horizon_group = try(interface.split_horizon_group, null)
           }
         ]
-        segment_routing_srv6_evis = [
-          for srv6_evi in try(bridge_domain.segment_routing_srv6_evis, []) : {
+        srv6_evis = [
+          for srv6_evi in try(bridge_domain.srv6_evis, []) : {
             vpn_id = try(srv6_evi.vpn_id, null)
           }
         ]
@@ -55,6 +55,6 @@ resource "iosxr_l2vpn_bridge_group_bridge_domain" "l2vpn_bridge_group_bridge_dom
   storm_control_unknown_unicast_pps  = each.value.storm_control_unknown_unicast_pps
   evis                               = each.value.evis
   interfaces                         = each.value.interfaces
-  segment_routing_srv6_evis          = each.value.segment_routing_srv6_evis
+  srv6_evis                          = each.value.srv6_evis
   vnis                               = each.value.vnis
 }
