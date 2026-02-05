@@ -17,6 +17,7 @@ locals {
         timer_advertisement_milliseconds = try(vrrp_interface.timer_advertisement_milliseconds, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.timer_advertisement_milliseconds, null)
         timer_advertisement_seconds      = try(vrrp_interface.timer_advertisement_seconds, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.timer_advertisement_seconds, null)
         timer_force                      = try(vrrp_interface.timer_force, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.timer_force, null)
+        unicast_peer                     = try(vrrp_interface.unicast_peer, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.unicast_peer, null)
         global_addresses = try(length(vrrp_interface.global_addresses) == 0, true) ? null : [for global_address in vrrp_interface.global_addresses : {
           address = try(global_address.address, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.global_addresses_address, null)
           }
@@ -53,6 +54,7 @@ resource "iosxr_router_vrrp_interface_ipv6" "router_vrrp_interface_ipv6" {
   timer_advertisement_milliseconds = each.value.timer_advertisement_milliseconds
   timer_advertisement_seconds      = each.value.timer_advertisement_seconds
   timer_force                      = each.value.timer_force
+  unicast_peer                     = each.value.unicast_peer
   track_interfaces                 = each.value.track_interfaces
   track_objects                    = each.value.track_objects
 }
