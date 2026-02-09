@@ -19,17 +19,17 @@ locals {
         timer_force                      = try(vrrp_interface.timer_force, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.timer_force, null)
         unicast_peer                     = try(vrrp_interface.unicast_peer, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.unicast_peer, null)
         global_addresses = try(length(vrrp_interface.global_addresses) == 0, true) ? null : [for global_address in vrrp_interface.global_addresses : {
-          address = try(global_address.address, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.global_addresses_address, null)
+          address = try(global_address.address, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.global_addresses.address, null)
           }
         ]
         track_interfaces = try(length(vrrp_interface.track_interfaces) == 0, true) ? null : [for track_interface in vrrp_interface.track_interfaces : {
-          interface_name     = try(track_interface.interface_name, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_interfaces_interface_name, null)
-          priority_decrement = try(track_interface.priority_decrement, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_interfaces_priority_decrement, null)
+          interface_name     = try(track_interface.interface_name, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_interfaces.interface_name, null)
+          priority_decrement = try(track_interface.priority_decrement, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_interfaces.priority_decrement, null)
           }
         ]
         track_objects = try(length(vrrp_interface.track_objects) == 0, true) ? null : [for track_object in vrrp_interface.track_objects : {
-          object_name        = try(track_object.object_name, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_objects_object_name, null)
-          priority_decrement = try(track_object.priority_decrement, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_objects_priority_decrement, null)
+          object_name        = try(track_object.object_name, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_objects.object_name, null)
+          priority_decrement = try(track_object.priority_decrement, local.defaults.iosxr.devices.configuration.router_vrrp_interface_ipv6.track_objects.priority_decrement, null)
           }
         ]
       }
