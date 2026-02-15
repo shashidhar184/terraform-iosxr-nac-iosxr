@@ -116,6 +116,7 @@ module "iosxr" {
 | [iosxr_mpls_traffic_eng.mpls_traffic_eng](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/mpls_traffic_eng) | resource |
 | [iosxr_ntp.ntp](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/ntp) | resource |
 | [iosxr_pce.pce](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/pce) | resource |
+| [iosxr_policy_map_pbr.policy_map_pbr](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/policy_map_pbr) | resource |
 | [iosxr_policy_map_qos.policy_map_qos](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/policy_map_qos) | resource |
 | [iosxr_prefix_set.prefix_set](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/prefix_set) | resource |
 | [iosxr_radius_source_interface.radius_source_interface](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/radius_source_interface) | resource |
