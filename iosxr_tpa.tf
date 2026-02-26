@@ -35,3 +35,4 @@ resource "iosxr_tpa" "tpa" {
     }]
   }]
 }
+
