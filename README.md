@@ -110,6 +110,9 @@ module "iosxr" {
 | [iosxr_l2vpn_bridge_group_bridge_domain.l2vpn_bridge_group_bridge_domain](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/l2vpn_bridge_group_bridge_domain) | resource |
 | [iosxr_l2vpn_pw_class.l2vpn_pw_class](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/l2vpn_pw_class) | resource |
 | [iosxr_lacp.lacp](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/lacp) | resource |
+| [iosxr_line_console.line_console](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/line_console) | resource |
+| [iosxr_line_default.line_default](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/line_default) | resource |
+| [iosxr_line_template.line_template](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/line_template) | resource |
 | [iosxr_lldp.lldp](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/lldp) | resource |
 | [iosxr_logging.logging](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/logging) | resource |
 | [iosxr_logging_vrf.logging_vrf](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/logging_vrf) | resource |
@@ -178,6 +181,7 @@ module "iosxr" {
 | [iosxr_telnet.telnet](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/telnet) | resource |
 | [iosxr_tpa.tpa](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/tpa) | resource |
 | [iosxr_vrf.vrf](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/vrf) | resource |
+| [iosxr_vty_pool.vty_pool](https://registry.terraform.io/providers/CiscoDevNet/iosxr/0.7.0/docs/resources/vty_pool) | resource |
 ## Modules
 
 | Name | Source | Version |
