@@ -2,7 +2,7 @@
 
 locals {
   evpn = { for device in local.devices : device.name => {
-    bgp_rd = try(local.device_config[device.name].evpn.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.bgp.rd, null) != null ? provider::utils::parse_bgp_rd_rt(
+    bgp_rd = try(local.device_config[device.name].evpn.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.bgp.rd, null) != null ? provider::utils::normalize_bgp_rd(
       try(local.device_config[device.name].evpn.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.bgp.rd)
     ) : null
     cost_out                                                  = try(local.device_config[device.name].evpn.cost_out, local.defaults.iosxr.devices.configuration.evpn.cost_out, null)
@@ -164,16 +164,16 @@ locals {
         description                      = try(evi.description, local.defaults.iosxr.devices.configuration.evpn.evis.description, null)
         load_balancing                   = try(evi.load_balancing, local.defaults.iosxr.devices.configuration.evpn.evis.load_balancing, null)
         load_balancing_flow_label_static = try(evi.load_balancing_flow_label_static, local.defaults.iosxr.devices.configuration.evpn.evis.load_balancing_flow_label_static, null)
-        bgp_rd = try(evi.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.rd, null) != null ? provider::utils::parse_bgp_rd_rt(
+        bgp_rd = try(evi.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.rd, null) != null ? provider::utils::normalize_bgp_rd(
           try(evi.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.rd)
         ) : null
         bgp_route_policy_import = try(evi.bgp.route_policy_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_policy_import, null)
         bgp_route_policy_export = try(evi.bgp.route_policy_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_policy_export, null)
         bgp_route_target_import = try(evi.bgp.route_target_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_import, null) != null ? [
-          for rt in try(evi.bgp.route_target_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_import) : provider::utils::parse_bgp_rd_rt(rt)
+          for rt in try(evi.bgp.route_target_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_import) : provider::utils::normalize_bgp_rt(rt)
         ] : null
         bgp_route_target_export = try(evi.bgp.route_target_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_export, null) != null ? [
-          for rt in try(evi.bgp.route_target_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_export) : provider::utils::parse_bgp_rd_rt(rt)
+          for rt in try(evi.bgp.route_target_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_export) : provider::utils::normalize_bgp_rt(rt)
         ] : null
         advertise_mac               = try(evi.advertise_mac, local.defaults.iosxr.devices.configuration.evpn.evis.advertise_mac, null)
         unknown_unicast_suppression = try(evi.unknown_unicast_suppression, local.defaults.iosxr.devices.configuration.evpn.evis.unknown_unicast_suppression, null)
