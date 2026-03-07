@@ -6,26 +6,26 @@ locals {
       try(local.device_config[device.name].evpn.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.bgp.rd)
     ) : null
     cost_out                                                  = try(local.device_config[device.name].evpn.cost_out, local.defaults.iosxr.devices.configuration.evpn.cost_out, null)
-    enforce_mtu_match                                         = try(local.device_config[device.name].evpn.enforce_mtu_match, local.defaults.iosxr.devices.configuration.evpn.enforce_mtu_match, null)
+    enforce_mtu_match                                         = try(local.device_config[device.name].evpn.mtu_match, local.defaults.iosxr.devices.configuration.evpn.mtu_match, null) == "enforce" ? true : null
     ethernet_segment_type_one_auto_generation_disable         = try(local.device_config[device.name].evpn.ethernet_segment.type_one_auto_generation_disable, local.defaults.iosxr.devices.configuration.evpn.ethernet_segment.type_one_auto_generation_disable, null)
-    host_ipv4_duplicate_detection_disable                     = try(local.device_config[device.name].evpn.host_ipv4_duplicate_detection.disable, local.defaults.iosxr.devices.configuration.evpn.host_ipv4_duplicate_detection.disable, null)
-    host_ipv4_duplicate_detection_freeze_time                 = try(local.device_config[device.name].evpn.host_ipv4_duplicate_detection.freeze_time, local.defaults.iosxr.devices.configuration.evpn.host_ipv4_duplicate_detection.freeze_time, null)
-    host_ipv4_duplicate_detection_move_count                  = try(local.device_config[device.name].evpn.host_ipv4_duplicate_detection.move_count, local.defaults.iosxr.devices.configuration.evpn.host_ipv4_duplicate_detection.move_count, null)
-    host_ipv4_duplicate_detection_move_interval               = try(local.device_config[device.name].evpn.host_ipv4_duplicate_detection.move_interval, local.defaults.iosxr.devices.configuration.evpn.host_ipv4_duplicate_detection.move_interval, null)
-    host_ipv4_duplicate_detection_reset_freeze_count_interval = try(local.device_config[device.name].evpn.host_ipv4_duplicate_detection.reset_freeze_count_interval, local.defaults.iosxr.devices.configuration.evpn.host_ipv4_duplicate_detection.reset_freeze_count_interval, null)
-    host_ipv4_duplicate_detection_retry_count                 = try(local.device_config[device.name].evpn.host_ipv4_duplicate_detection.retry_count, local.defaults.iosxr.devices.configuration.evpn.host_ipv4_duplicate_detection.retry_count, null)
-    host_ipv6_duplicate_detection_disable                     = try(local.device_config[device.name].evpn.host_ipv6_duplicate_detection.disable, local.defaults.iosxr.devices.configuration.evpn.host_ipv6_duplicate_detection.disable, null)
-    host_ipv6_duplicate_detection_freeze_time                 = try(local.device_config[device.name].evpn.host_ipv6_duplicate_detection.freeze_time, local.defaults.iosxr.devices.configuration.evpn.host_ipv6_duplicate_detection.freeze_time, null)
-    host_ipv6_duplicate_detection_move_count                  = try(local.device_config[device.name].evpn.host_ipv6_duplicate_detection.move_count, local.defaults.iosxr.devices.configuration.evpn.host_ipv6_duplicate_detection.move_count, null)
-    host_ipv6_duplicate_detection_move_interval               = try(local.device_config[device.name].evpn.host_ipv6_duplicate_detection.move_interval, local.defaults.iosxr.devices.configuration.evpn.host_ipv6_duplicate_detection.move_interval, null)
-    host_ipv6_duplicate_detection_reset_freeze_count_interval = try(local.device_config[device.name].evpn.host_ipv6_duplicate_detection.reset_freeze_count_interval, local.defaults.iosxr.devices.configuration.evpn.host_ipv6_duplicate_detection.reset_freeze_count_interval, null)
-    host_ipv6_duplicate_detection_retry_count                 = try(local.device_config[device.name].evpn.host_ipv6_duplicate_detection.retry_count, local.defaults.iosxr.devices.configuration.evpn.host_ipv6_duplicate_detection.retry_count, null)
-    ignore_mtu_mismatch                                       = try(local.device_config[device.name].evpn.ignore_mtu_mismatch, local.defaults.iosxr.devices.configuration.evpn.ignore_mtu_mismatch, null)
-    load_balancing_flow_label_static                          = try(local.device_config[device.name].evpn.load_balancing_flow_label_static, local.defaults.iosxr.devices.configuration.evpn.load_balancing_flow_label_static, null)
+    host_ipv4_duplicate_detection_disable                     = try(local.device_config[device.name].evpn.duplicate_detection.ipv4.disable, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv4.disable, null)
+    host_ipv4_duplicate_detection_freeze_time                 = try(local.device_config[device.name].evpn.duplicate_detection.ipv4.freeze_time, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv4.freeze_time, null)
+    host_ipv4_duplicate_detection_move_count                  = try(local.device_config[device.name].evpn.duplicate_detection.ipv4.move_count, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv4.move_count, null)
+    host_ipv4_duplicate_detection_move_interval               = try(local.device_config[device.name].evpn.duplicate_detection.ipv4.move_interval, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv4.move_interval, null)
+    host_ipv4_duplicate_detection_reset_freeze_count_interval = try(local.device_config[device.name].evpn.duplicate_detection.ipv4.reset_freeze_count_interval, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv4.reset_freeze_count_interval, null)
+    host_ipv4_duplicate_detection_retry_count                 = try(tostring(local.device_config[device.name].evpn.duplicate_detection.ipv4.retry_count), tostring(local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv4.retry_count), null)
+    host_ipv6_duplicate_detection_disable                     = try(local.device_config[device.name].evpn.duplicate_detection.ipv6.disable, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv6.disable, null)
+    host_ipv6_duplicate_detection_freeze_time                 = try(local.device_config[device.name].evpn.duplicate_detection.ipv6.freeze_time, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv6.freeze_time, null)
+    host_ipv6_duplicate_detection_move_count                  = try(local.device_config[device.name].evpn.duplicate_detection.ipv6.move_count, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv6.move_count, null)
+    host_ipv6_duplicate_detection_move_interval               = try(local.device_config[device.name].evpn.duplicate_detection.ipv6.move_interval, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv6.move_interval, null)
+    host_ipv6_duplicate_detection_reset_freeze_count_interval = try(local.device_config[device.name].evpn.duplicate_detection.ipv6.reset_freeze_count_interval, local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv6.reset_freeze_count_interval, null)
+    host_ipv6_duplicate_detection_retry_count                 = try(tostring(local.device_config[device.name].evpn.duplicate_detection.ipv6.retry_count), tostring(local.defaults.iosxr.devices.configuration.evpn.duplicate_detection.ipv6.retry_count), null)
+    ignore_mtu_mismatch                                       = try(local.device_config[device.name].evpn.mtu_match, local.defaults.iosxr.devices.configuration.evpn.mtu_match, null) == "ignore" ? true : null
+    load_balancing_flow_label_static                          = try(local.device_config[device.name].evpn.load_balancing.flow_label_static, local.defaults.iosxr.devices.configuration.evpn.load_balancing.flow_label_static, null)
     logging_df_election                                       = try(local.device_config[device.name].evpn.logging_df_election, local.defaults.iosxr.devices.configuration.evpn.logging_df_election, null)
     source_interface                                          = try(local.device_config[device.name].evpn.source_interface, local.defaults.iosxr.devices.configuration.evpn.source_interface, null)
-    srv6                                                      = try(local.device_config[device.name].evpn.srv6, local.defaults.iosxr.devices.configuration.evpn.srv6, null)
-    srv6_usid_allocation_wide_local_id_block                  = try(local.device_config[device.name].evpn.srv6_usid_allocation_wide_local_id_block, local.defaults.iosxr.devices.configuration.evpn.srv6_usid_allocation_wide_local_id_block, null)
+    srv6                                                      = try(local.device_config[device.name].evpn.srv6.enabled, local.defaults.iosxr.devices.configuration.evpn.srv6.enabled, null)
+    srv6_usid_allocation_wide_local_id_block                  = try(local.device_config[device.name].evpn.srv6.usid_allocation_wide_local_id_block, local.defaults.iosxr.devices.configuration.evpn.srv6.usid_allocation_wide_local_id_block, null)
     staggered_bringup_timer                                   = try(local.device_config[device.name].evpn.staggered_bringup_timer, local.defaults.iosxr.devices.configuration.evpn.staggered_bringup_timer, null)
     startup_cost_in                                           = try(local.device_config[device.name].evpn.startup_cost_in, local.defaults.iosxr.devices.configuration.evpn.startup_cost_in, null)
     timers_ac_debounce                                        = try(local.device_config[device.name].evpn.timers.ac_debounce, local.defaults.iosxr.devices.configuration.evpn.timers.ac_debounce, null)
@@ -34,68 +34,68 @@ locals {
     timers_mac_postpone                                       = try(local.device_config[device.name].evpn.timers.mac_postpone, local.defaults.iosxr.devices.configuration.evpn.timers.mac_postpone, null)
     timers_peering                                            = try(local.device_config[device.name].evpn.timers.peering, local.defaults.iosxr.devices.configuration.evpn.timers.peering, null)
     timers_recovery                                           = try(local.device_config[device.name].evpn.timers.recovery, local.defaults.iosxr.devices.configuration.evpn.timers.recovery, null)
-    transmit_l2_mtu                                           = try(local.device_config[device.name].evpn.transmit_l2_mtu, local.defaults.iosxr.devices.configuration.evpn.transmit_l2_mtu, null)
-    transmit_mtu_zero                                         = try(local.device_config[device.name].evpn.transmit_mtu_zero, local.defaults.iosxr.devices.configuration.evpn.transmit_mtu_zero, null)
+    transmit_l2_mtu                                           = try(local.device_config[device.name].evpn.transmit_mtu, local.defaults.iosxr.devices.configuration.evpn.transmit_mtu, null) == "layer_2" ? true : null
+    transmit_mtu_zero                                         = try(local.device_config[device.name].evpn.transmit_mtu, local.defaults.iosxr.devices.configuration.evpn.transmit_mtu, null) == "zero" ? true : null
     virtual_access_evi_ethernet_segment_bgp_rt = try(
       provider::utils::normalize_mac(
-        try(local.device_config[device.name].evpn.virtual_access_evi.ethernet_segment.bgp_rt, local.defaults.iosxr.devices.configuration.evpn.virtual_access_evi.ethernet_segment.bgp_rt),
+        try(local.device_config[device.name].evpn.virtual.access_evi.ethernet_segment.route_target, local.defaults.iosxr.devices.configuration.evpn.virtual.access_evi.ethernet_segment.route_target),
         "colon"
       ),
       null
     )
-    virtual_access_evi_ethernet_segment_esi_zero = try(local.device_config[device.name].evpn.virtual_access_evi.ethernet_segment.esi_zero, local.defaults.iosxr.devices.configuration.evpn.virtual_access_evi.ethernet_segment.esi_zero, null)
+    virtual_access_evi_ethernet_segment_esi_zero = try(local.device_config[device.name].evpn.virtual.access_evi.ethernet_segment.esi_zero, local.defaults.iosxr.devices.configuration.evpn.virtual.access_evi.ethernet_segment.esi_zero, null)
     groups = try(length(local.device_config[device.name].evpn.groups) == 0, true) ? null : [for group in local.device_config[device.name].evpn.groups : {
-      group_id = try(group.group_id, local.defaults.iosxr.devices.configuration.evpn.groups.group_id, null)
+      group_id = try(group.id, local.defaults.iosxr.devices.configuration.evpn.groups.id, null)
       core_interfaces = try(length(group.core_interfaces) == 0, true) ? null : [for core_interface in group.core_interfaces : {
-        interface_name = try(core_interface.interface_name, local.defaults.iosxr.devices.configuration.evpn.groups.core_interfaces.interface_name, null)
+        interface_name = try(core_interface.name, local.defaults.iosxr.devices.configuration.evpn.groups.core_interfaces.name, null)
       }]
     }]
-    srv6_locators = try(length(local.device_config[device.name].evpn.srv6_locators) == 0, true) ? null : [for locator in local.device_config[device.name].evpn.srv6_locators : {
-      locator_name                        = try(locator.locator_name, local.defaults.iosxr.devices.configuration.evpn.srv6_locators.locator_name, null)
-      usid_allocation_wide_local_id_block = try(locator.usid_allocation_wide_local_id_block, local.defaults.iosxr.devices.configuration.evpn.srv6_locators.usid_allocation_wide_local_id_block, null)
+    srv6_locators = try(length(local.device_config[device.name].evpn.srv6.locators) == 0, true) ? null : [for locator in local.device_config[device.name].evpn.srv6.locators : {
+      locator_name                        = try(locator.name, local.defaults.iosxr.devices.configuration.evpn.srv6.locators.name, null)
+      usid_allocation_wide_local_id_block = try(locator.usid_allocation_wide_local_id_block, local.defaults.iosxr.devices.configuration.evpn.srv6.locators.usid_allocation_wide_local_id_block, null)
     }]
-    virtual_neighbors = try(length(local.device_config[device.name].evpn.virtual_neighbors) == 0, true) ? null : [for neighbor in local.device_config[device.name].evpn.virtual_neighbors : {
-      address = try(neighbor.address, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.address, null)
-      pw_id   = try(neighbor.pw_id, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.pw_id, null)
+    virtual_neighbors = try(length(local.device_config[device.name].evpn.virtual.neighbors) == 0, true) ? null : [for neighbor in local.device_config[device.name].evpn.virtual.neighbors : {
+      address = try(neighbor.address, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.address, null)
+      pw_id   = try(neighbor.pw_id, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.pw_id, null)
       ethernet_segment_bgp_rt = try(
         provider::utils::normalize_mac(
-          try(neighbor.ethernet_segment.bgp_rt, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.bgp_rt),
+          try(neighbor.ethernet_segment.route_target, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.route_target),
           "colon"
         ),
         null
       )
-      ethernet_segment_esi_zero                                       = try(neighbor.ethernet_segment.esi_zero, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.esi_zero, null)
-      ethernet_segment_service_carving_hrw                            = try(neighbor.ethernet_segment.service_carving_hrw, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_hrw, null)
-      ethernet_segment_service_carving_manual_primary                 = try(neighbor.ethernet_segment.service_carving_manual.primary, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_manual.primary, null)
-      ethernet_segment_service_carving_manual_secondary               = try(neighbor.ethernet_segment.service_carving_manual.secondary, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_manual.secondary, null)
-      ethernet_segment_service_carving_multicast_hrw_g                = try(neighbor.ethernet_segment.service_carving_multicast_hrw_g, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_multicast_hrw_g, null)
-      ethernet_segment_service_carving_multicast_hrw_s_g              = try(neighbor.ethernet_segment.service_carving_multicast_hrw_s_g, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_multicast_hrw_s_g, null)
-      ethernet_segment_service_carving_preference_based_access_driven = try(neighbor.ethernet_segment.service_carving_preference_based.access_driven, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_preference_based.access_driven, null)
-      ethernet_segment_service_carving_preference_based_weight        = try(neighbor.ethernet_segment.service_carving_preference_based.weight, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.ethernet_segment.service_carving_preference_based.weight, null)
-      timers_ac_debounce                                              = try(neighbor.timers.ac_debounce, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.timers.ac_debounce, null)
-      timers_carving                                                  = try(neighbor.timers.carving, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.timers.carving, null)
-      timers_peering                                                  = try(neighbor.timers.peering, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.timers.peering, null)
-      timers_recovery                                                 = try(neighbor.timers.recovery, local.defaults.iosxr.devices.configuration.evpn.virtual_neighbors.timers.recovery, null)
+      ethernet_segment_esi_zero                                       = try(neighbor.ethernet_segment.esi_zero, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.esi_zero, null)
+      ethernet_segment_service_carving_hrw                            = try(neighbor.ethernet_segment.service_carving_hrw, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_hrw, null)
+      ethernet_segment_service_carving_manual_primary                 = try(neighbor.ethernet_segment.service_carving_manual.primary, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_manual.primary, null)
+      ethernet_segment_service_carving_manual_secondary               = try(neighbor.ethernet_segment.service_carving_manual.secondary, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_manual.secondary, null)
+      ethernet_segment_service_carving_multicast_hrw_g                = try(neighbor.ethernet_segment.service_carving_multicast.hrw_g, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_multicast.hrw_g, null)
+      ethernet_segment_service_carving_multicast_hrw_s_g              = try(neighbor.ethernet_segment.service_carving_multicast.hrw_s_g, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_multicast.hrw_s_g, null)
+      ethernet_segment_service_carving_preference_based_access_driven = try(neighbor.ethernet_segment.service_carving_preference.access_driven, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_preference.access_driven, null)
+      ethernet_segment_service_carving_preference_based_weight        = try(neighbor.ethernet_segment.service_carving_preference.weight, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.ethernet_segment.service_carving_preference.weight, null)
+      timers_ac_debounce                                              = try(neighbor.timers.ac_debounce, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.timers.ac_debounce, null)
+      timers_carving                                                  = try(neighbor.timers.carving, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.timers.carving, null)
+      timers_peering                                                  = try(neighbor.timers.peering, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.timers.peering, null)
+      timers_recovery                                                 = try(neighbor.timers.recovery, local.defaults.iosxr.devices.configuration.evpn.virtual.neighbors.timers.recovery, null)
     }]
-    virtual_vfis = try(length(local.device_config[device.name].evpn.virtual_vfis) == 0, true) ? null : [for vfi in local.device_config[device.name].evpn.virtual_vfis : {
-      vfi_name = try(vfi.vfi_name, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.vfi_name, null)
+    virtual_vfis = try(length(local.device_config[device.name].evpn.virtual.vfis) == 0, true) ? null : [for vfi in local.device_config[device.name].evpn.virtual.vfis : {
+      vfi_name = try(vfi.name, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.name, null)
       ethernet_segment_bgp_rt = try(
         provider::utils::normalize_mac(
-          try(vfi.ethernet_segment.bgp_rt, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.bgp_rt),
+          try(vfi.ethernet_segment.route_target, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.route_target),
           "colon"
         ),
         null
       )
-      ethernet_segment_esi_zero                                       = try(vfi.ethernet_segment.esi_zero, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.esi_zero, null)
-      ethernet_segment_service_carving_hrw                            = try(vfi.ethernet_segment.service_carving_hrw, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.service_carving_hrw, null)
-      ethernet_segment_service_carving_manual_primary                 = try(vfi.ethernet_segment.service_carving_manual.primary, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.service_carving_manual.primary, null)
-      ethernet_segment_service_carving_manual_secondary               = try(vfi.ethernet_segment.service_carving_manual.secondary, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.service_carving_manual.secondary, null)
-      ethernet_segment_service_carving_preference_based_access_driven = try(vfi.ethernet_segment.service_carving_preference_based.access_driven, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.service_carving_preference_based.access_driven, null)
-      ethernet_segment_service_carving_preference_based_weight        = try(vfi.ethernet_segment.service_carving_preference_based.weight, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.ethernet_segment.service_carving_preference_based.weight, null)
-      timers_ac_debounce                                              = try(vfi.timers.ac_debounce, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.timers.ac_debounce, null)
-      timers_carving                                                  = try(vfi.timers.carving, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.timers.carving, null)
-      timers_peering                                                  = try(vfi.timers.peering, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.timers.peering, null)
-      timers_recovery                                                 = try(vfi.timers.recovery, local.defaults.iosxr.devices.configuration.evpn.virtual_vfis.timers.recovery, null)
+      ethernet_segment_esi_zero                                       = try(vfi.ethernet_segment.esi_zero, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.esi_zero, null)
+      ethernet_segment_service_carving_hrw                            = try(vfi.ethernet_segment.service_carving_hrw, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.service_carving_hrw, null)
+      ethernet_segment_service_carving_manual_primary                 = try(vfi.ethernet_segment.service_carving_manual.primary, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.service_carving_manual.primary, null)
+      ethernet_segment_service_carving_manual_secondary               = try(vfi.ethernet_segment.service_carving_manual.secondary, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.service_carving_manual.secondary, null)
+      ethernet_segment_service_carving_preference_based_access_driven = try(vfi.ethernet_segment.service_carving_preference.access_driven, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.service_carving_preference.access_driven, null)
+      ethernet_segment_service_carving_preference_based_weight        = try(vfi.ethernet_segment.service_carving_preference.weight, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.ethernet_segment.service_carving_preference.weight, null)
+      timers_ac_debounce                                              = try(vfi.timers.ac_debounce, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.timers.ac_debounce, null)
+      timers_carving                                                  = try(vfi.timers.carving, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.timers.carving, null)
+      timers_peering                                                  = try(vfi.timers.peering, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.timers.peering, null)
+      timers_recovery                                                 = try(vfi.timers.recovery, local.defaults.iosxr.devices.configuration.evpn.virtual.vfis.timers.recovery, null)
     }]
   } if try(local.device_config[device.name].evpn, null) != null || try(local.defaults.iosxr.devices.configuration.evpn, null) != null }
 }
@@ -158,29 +158,29 @@ locals {
   evpn_evis = flatten([
     for device in local.devices : [
       for evi in try(local.device_config[device.name].evpn.evis, []) : {
-        key                              = format("%s/%s", device.name, evi.vpn_id)
+        key                              = format("%s/%s", device.name, evi.id)
         device_name                      = device.name
-        vpn_id                           = try(evi.vpn_id, local.defaults.iosxr.devices.configuration.evpn.evis.vpn_id, null)
+        vpn_id                           = try(evi.id, local.defaults.iosxr.devices.configuration.evpn.evis.id, null)
         description                      = try(evi.description, local.defaults.iosxr.devices.configuration.evpn.evis.description, null)
-        load_balancing                   = try(evi.load_balancing, local.defaults.iosxr.devices.configuration.evpn.evis.load_balancing, null)
-        load_balancing_flow_label_static = try(evi.load_balancing_flow_label_static, local.defaults.iosxr.devices.configuration.evpn.evis.load_balancing_flow_label_static, null)
+        load_balancing                   = try(evi.load_balancing.enabled, local.defaults.iosxr.devices.configuration.evpn.evis.load_balancing.enabled, null)
+        load_balancing_flow_label_static = try(evi.load_balancing.flow_label_static, local.defaults.iosxr.devices.configuration.evpn.evis.load_balancing.flow_label_static, null)
         bgp_rd = try(evi.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.rd, null) != null ? provider::utils::normalize_bgp_rd(
           try(evi.bgp.rd, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.rd)
         ) : null
-        bgp_route_policy_import = try(evi.bgp.route_policy_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_policy_import, null)
-        bgp_route_policy_export = try(evi.bgp.route_policy_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_policy_export, null)
-        bgp_route_target_import = try(evi.bgp.route_target_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_import, null) != null ? [
-          for rt in try(evi.bgp.route_target_import, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_import) : provider::utils::normalize_bgp_rt(rt)
+        bgp_route_policy_import = try(evi.bgp.import_route_policy, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.import_route_policy, null)
+        bgp_route_policy_export = try(evi.bgp.export_route_policy, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.export_route_policy, null)
+        bgp_route_target_import = try(evi.bgp.route_target_imports, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_imports, null) != null ? [
+          for rt in try(evi.bgp.route_target_imports, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_imports) : provider::utils::normalize_bgp_rt(rt)
         ] : null
-        bgp_route_target_export = try(evi.bgp.route_target_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_export, null) != null ? [
-          for rt in try(evi.bgp.route_target_export, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_export) : provider::utils::normalize_bgp_rt(rt)
+        bgp_route_target_export = try(evi.bgp.route_target_exports, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_exports, null) != null ? [
+          for rt in try(evi.bgp.route_target_exports, local.defaults.iosxr.devices.configuration.evpn.evis.bgp.route_target_exports) : provider::utils::normalize_bgp_rt(rt)
         ] : null
         advertise_mac               = try(evi.advertise_mac, local.defaults.iosxr.devices.configuration.evpn.evis.advertise_mac, null)
         unknown_unicast_suppression = try(evi.unknown_unicast_suppression, local.defaults.iosxr.devices.configuration.evpn.evis.unknown_unicast_suppression, null)
         control_word_disable        = try(evi.control_word_disable, local.defaults.iosxr.devices.configuration.evpn.evis.control_word_disable, null)
-        etree                       = try(evi.etree, local.defaults.iosxr.devices.configuration.evpn.evis.etree, null)
-        etree_leaf                  = try(evi.etree_leaf, local.defaults.iosxr.devices.configuration.evpn.evis.etree_leaf, null)
-        etree_rt_leaf               = try(evi.etree_rt_leaf, local.defaults.iosxr.devices.configuration.evpn.evis.etree_rt_leaf, null)
+        etree                       = try(evi.etree, local.defaults.iosxr.devices.configuration.evpn.evis.etree, null) != null ? true : null
+        etree_leaf                  = try(evi.etree, local.defaults.iosxr.devices.configuration.evpn.evis.etree, null) == "leaf" ? true : null
+        etree_rt_leaf               = try(evi.etree, local.defaults.iosxr.devices.configuration.evpn.evis.etree, null) == "rt_leaf" ? true : null
       }
     ]
   ])
@@ -243,9 +243,9 @@ locals {
   evpn_interfaces = flatten([
     for device in local.devices : [
       for intf in try(local.device_config[device.name].evpn.interfaces, []) : {
-        key                                                             = format("%s/%s", device.name, intf.interface_name)
+        key                                                             = format("%s/%s", device.name, intf.name)
         device_name                                                     = device.name
-        interface_name                                                  = intf.interface_name
+        interface_name                                                  = intf.name
         core_isolation_group                                            = try(intf.core_isolation_group, local.defaults.iosxr.devices.configuration.evpn.interfaces.core_isolation_group, null)
         timers_peering                                                  = try(intf.timers.peering, local.defaults.iosxr.devices.configuration.evpn.interfaces.timers.peering, null)
         timers_recovery                                                 = try(intf.timers.recovery, local.defaults.iosxr.devices.configuration.evpn.interfaces.timers.recovery, null)
@@ -260,13 +260,13 @@ locals {
         ethernet_segment_service_carving_hrw                            = try(intf.ethernet_segment.service_carving_hrw, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_hrw, null)
         ethernet_segment_service_carving_manual_primary                 = try(intf.ethernet_segment.service_carving_manual.primary, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_manual.primary, null)
         ethernet_segment_service_carving_manual_secondary               = try(intf.ethernet_segment.service_carving_manual.secondary, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_manual.secondary, null)
-        ethernet_segment_service_carving_multicast_hrw_g                = try(intf.ethernet_segment.service_carving_multicast_hrw_g, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_multicast_hrw_g, null)
-        ethernet_segment_service_carving_multicast_hrw_s_g              = try(intf.ethernet_segment.service_carving_multicast_hrw_s_g, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_multicast_hrw_s_g, null)
-        ethernet_segment_service_carving_preference_based_weight        = try(intf.ethernet_segment.service_carving_preference_based.weight, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_preference_based.weight, null)
-        ethernet_segment_service_carving_preference_based_access_driven = try(intf.ethernet_segment.service_carving_preference_based.access_driven, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_preference_based.access_driven, null)
+        ethernet_segment_service_carving_multicast_hrw_g                = try(intf.ethernet_segment.service_carving_multicast.hrw_g, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_multicast.hrw_g, null)
+        ethernet_segment_service_carving_multicast_hrw_s_g              = try(intf.ethernet_segment.service_carving_multicast.hrw_s_g, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_multicast.hrw_s_g, null)
+        ethernet_segment_service_carving_preference_based_weight        = try(intf.ethernet_segment.service_carving_preference.weight, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_preference.weight, null)
+        ethernet_segment_service_carving_preference_based_access_driven = try(intf.ethernet_segment.service_carving_preference.access_driven, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.service_carving_preference.access_driven, null)
         ethernet_segment_bgp_rt = try(
           provider::utils::normalize_mac(
-            try(intf.ethernet_segment.bgp_rt, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.bgp_rt),
+            try(intf.ethernet_segment.route_target, local.defaults.iosxr.devices.configuration.evpn.interfaces.ethernet_segment.route_target),
             "colon"
           ),
           null
